@@ -1,9 +1,183 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-    </head>
-    <body>
-        <a href="/question/0"><button>웹툰 추천 시작하기!</button></a>
-    </body>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>IknowAIGO</title>
+  <style>
+    body
+    
+    .bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 20px 40px;
+      box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
+      gap: 20px;
+    }
+
+    .btn {
+      background: linear-gradient(to bottom, #ffd700, #ff9900);
+      border: 3px solid #ffcc00;
+      color: #fff;
+      padding: 22px 0;
+      font-size: 30px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+      transition: transform 0.1s ease;
+      width: 300px;
+      max-width: 90vw;
+      text-align: center;
+    }
+
+    .btn:hover { transform: scale(1.05); }
+    .btn:active { transform: scale(0.95); }
+
+    .highlight-button {
+      background-color: #ff3366;
+      border: none;
+      color: #fff;
+      font-size: 26px;
+      font-weight: bold;
+      height: 120px;
+      border-radius: 20px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+      transition: transform 0.1s ease;
+      flex: 1;
+      min-width: 300px;
+      max-width: 1000px;
+    }
+
+    .highlight-button:hover { transform: scale(1.05); }
+    .highlight-button:active { transform: scale(0.95); }
+
+    .start-button { margin-left: auto; }
+
+    .main-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #0f172a;
+      color: white;
+      padding: 15px 30px;
+      flex-wrap: wrap;
+    }
+
+    .logo { font-size: 24px; font-weight: bold; }
+
+    .nav-menu {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .nav-menu a {
+      color: #e2e8f0;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    .nav-menu a:hover {
+      color: #38bdf8;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .search-box input {
+      padding: 7px 10px;
+      border-radius: 5px;
+      border: none;
+      width: 200px;
+    }
+
+    .search-box button {
+      background-color: #38bdf8;
+      border: none;
+      padding: 7px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header class="main-header">
+    <div class="logo">IknowAIGO</div>
+
+    <nav class="nav-menu">
+      <a href="/allproblem">전체 문제</a>
+      <a href="#">단계별</a>
+      <a href="{{ url_for('problem', pid=todays_problem) }}">
+        추천 문제: {{ todays_problem }}
+      </a>
+      {% if session.get('logged_in') %}
+        <span style="color: #38bdf8;">{{ session.get('nickname') }}님</span>
+        <a href="/logout">로그아웃</a>
+      {% else %}
+        <a href="/login">로그인</a>
+        <a href="/signup">회원가입</a>
+      {% endif %}
+    </nav>
+
+  <form action="{{ url_for('search_problem') }}" method="get">
+      <input type="text" name="query" placeholder="문제를 검색하세요..." required>
+      <button type="submit">🔍</button>
+  </form>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul>
+      {% for msg in messages %}
+        <li style="color:red;">{{ msg }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+  </header>
+
+  <!-- 기존 header와 bottom-bar는 그대로 유지 -->
+
+<main style="padding: 40px; background-color: #f8f9fa; min-height: 80vh;">
+  <h2 style="text-align:center; margin-bottom:30px;">난이도별 문제</h2>
+  
+  {% for level in level_data %}
+    <section style="margin-bottom:40px;">
+      <h3 style="margin-bottom:15px;">{{ level.level_name | capitalize }}</h3>
+      <div style="display:flex; flex-wrap:wrap; gap:15px;">
+        {% for problem in level.problems %}
+          <div onclick="location.href='{{ url_for('problem', pid=problem.id) }}'"
+               style="cursor:pointer;
+                      background-color:white;
+                      border:1px solid #ddd;
+                      border-radius:10px;
+                      padding:20px;
+                      width:200px;
+                      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+                      transition: transform 0.1s ease;">
+            <strong>{{ problem.id }}</strong><br>
+            <span>{{ problem.title }}</span>
+          </div>
+        {% endfor %}
+      </div>
+    </section>
+  {% endfor %}
+</main>
+
+  <div class="bottom-bar">
+    <button class="btn"onclick="location.href='{{ url_for('solvedproblem') }}'">내가 푼 문제</button>
+    <button class="btn">유형 선택</button>
+    <button class="highlight-button start-button">시작하기</button>
+  </div>
+
+</body>
 </html>

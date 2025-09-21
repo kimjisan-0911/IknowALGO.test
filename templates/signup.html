@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up - IknowALGO</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #fff;
+        }
+        .login-container {
+            background-color: rgba(0, 0, 0, 0.75);
+            width: 400px;
+            padding: 40px;
+            margin: 100px auto;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.8);
+        }
+        h1, h3 {
+            text-align: center;
+        }
+        input[type="text"], input[type="password"], input[type="email"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0 20px 0;
+            border: none;
+            border-radius: 5px;
+            background: #222;
+            color: #fff;
+        }
+        input::placeholder {
+            color: #888;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            background: #28a745;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+        button:hover {
+            background: #45d36f;
+        }
+        .message {
+            text-align: center;
+            margin-top: 15px;
+            color: #ff6b6b;
+        }
+        .home-link {
+            display: block;
+            text-align: center;
+            color: skyblue;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>IknowALGO</h1>
+        <h3>회원가입</h3>
+
+        {% if message %}
+            <div class="message">{{ message }}</div>
+        {% endif %}
+
+        <form method="post" action="/signup">
+            <input type="text" id="username" name="username" placeholder="아이디 (4자 이상)" required>
+            <input type="password" id="password" name="password" placeholder="비밀번호 (8~16자)" required>
+            <input type="password" id="checkpassword" name="checkpassword" placeholder="비밀번호 재확인" required>
+            <input type="text" id="usernickname" name="usernickname" placeholder="닉네임" required>
+            <button type="submit">회원가입</button>
+            <div class="message" id="error-message"></div>
+        </form>
+        <a href="/login" class="home-link">로그인하기</a>
+        <a href="/" class="home-link">홈으로</a>
+    </div>
+</body>
+</html>

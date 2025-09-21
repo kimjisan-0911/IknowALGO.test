@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>모든 문제 - IknowALGO</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #0f172a;
+        }
+        ul {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0;
+            list-style: none;
+        }
+        li {
+            background: #fff;
+            margin-bottom: 10px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            transition: background-color 0.2s ease;
+        }
+        li:hover {
+            background-color: #e0f2fe;
+        }
+        a {
+            text-decoration: none;
+            color: #0284c7;
+            font-weight: 600;
+            font-size: 18px;
+            display: block;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .home-link {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+            color: #0284c7;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        .home-link:hover {
+            text-decoration: underline;
+        }
+        .problem-list {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0;
+            list-style: none;
+            max-height: 650px; /* 높이 제한 */
+            overflow-y: auto;  /* 세로 스크롤 */
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #fff;
+        }
+        .problem-list li {
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .problem-list li:hover {
+            background-color: #e0f2fe;
+        }
+        .problem-list li.correct {
+            background-color: #22c55e; /* 초록 */
+            color: white;
+        }
+        .problem-list li.incorrect {
+            background-color: #ef4444; /* 빨강 */
+            color: white;
+        }
+        .score-low { color: red; }
+        .score-medium { color: orange; }
+        .score-high { color: green; }
+    </style>
+</head>
+<body>
+    <h1>문제 목록</h1>
+    <ul class="problem-list">
+        {% for pid, prob in problems|dictsort(true) %}
+            {% set score_class = '' %}
+            {% set score_display = '' %}
+            {% if best_scores and pid in best_scores %}
+                {% set score = best_scores[pid] %}
+                {% set score_display = score ~ '/100' %}
+                {% if score < 50 %}
+                    {% set score_class = 'score-low' %}
+                {% elif score < 80 %}
+                    {% set score_class = 'score-medium' %}
+                {% else %}
+                    {% set score_class = 'score-high' %}
+                {% endif %}
+            {% endif %}
+            <li class="{{ score_class }}">
+                <a href="{{ url_for('problem', pid=pid) }}">
+                    {{ pid }}번 - {{ prob.title }}
+                    {% if score_display %}
+                        - <span class="{{ score_class }}">{{ score_display }}</span>
+                    {% endif %}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="/" class="home-link">← 홈으로 돌아가기</a>
+</body>
+</html>

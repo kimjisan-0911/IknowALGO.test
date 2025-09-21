@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>BMI 측정</title>
+  <style>
+    body { 
+      font-family: 'Malgun Gothic', sans-serif;
+      background-color: #f0f0f0;
+      padding: 30px;
+      text-align: center;
+    }
+    input {
+      padding: 10px;
+      font-size: 16px;
+      margin: 5px;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>BMI 측정기</h1>
+  <input id="name" type="text" placeholder="이름">
+  <input id="age" type="number" placeholder="나이">
+  <input id="height" type="number" placeholder="키(cm)">
+  <input id="weight" type="number" placeholder="몸무게(kg)">
+  <div>
+    <button onclick="calculateBMI()">결과 확인</button>
+  </div>
+  <div id="result"></div>
+
+  <script>
+    function calculateBMI() {
+      const name = document.getElementById('name').value;
+      const age = document.getElementById('age').value;
+      const height = parseFloat(document.getElementById('height').value);
+      const weight = parseFloat(document.getElementById('weight').value);
+      const resultArea = document.getElementById('result');
+
+      if (!name || !age || !height || !weight) {
+        resultArea.innerHTML = '정보를 입력해주세요';
+        return;
+      }
+
+      const bmi = weight / ((height / 100) ** 2);
+      let category = '';
+
+      if (bmi < 18.5) {
+        category = '저체중';
+      } else if (bmi < 23) {
+        category = '정상';
+      } else if (bmi < 25) {
+        category = '과체중';
+      } else {
+        category = '비만';
+      }
+
+      resultArea.innerHTML = `
+        이름: ${name}<br>
+        나이: ${age}세<br>
+        BMI: ${bmi.toFixed(2)} (${category})
+      `;
+    }
+  </script>
+</body>
+</html>
