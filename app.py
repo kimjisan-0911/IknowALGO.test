@@ -21,6 +21,7 @@ def question(page):
     return render_template("question.html")
 
 #낭녕ㅎ낭사데숃
+#니얼굴 내얼굴
 
 if __name__ == '__main__':
     app.run(debug=True)
