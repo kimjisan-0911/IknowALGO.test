@@ -15,6 +15,7 @@ app.secret_key = config.SECRET_KEY
 
 db.init_app(app)
 
+
 # test_case.json 파일을 읽어 problems 변수에 저장
 with open('test_case.json', encoding='utf-8') as f:
     raw_data = json.load(f)
@@ -233,34 +234,6 @@ def problem(pid):
 
     return render_template("problem_template.html", problem=problem, pid=pid, results=results, logged_in=logged_in, score=score)
 
-def init_database():
-    print("=" * 50)
-    print("데이터베이스 초기화 시작...")
-    print("=" * 50)
-    
-    try:
-        with app.app_context():
-            db.create_all()
-            print("✓ SQLAlchemy 데이터베이스 테이블 생성 완료")
-            print("\n생성된 테이블:")
-            print("- users: 사용자 정보")
-            print("- submissions: 문제 제출 기록")
-            print("- user_sessions: 사용자 세션 (향후 사용)")
-    except Exception as e:
-        print(f"✗ 데이터베이스 초기화 실패: {e}")
-        print("\n확인사항:")
-        print("1. MySQL 서버가 실행 중인지 확인")
-        print("2. config.py의 데이터베이스 설정 확인")
-        print("3. 데이터베이스 'iknowalgo'가 생성되었는지 확인")
-        print("\n서버를 시작할 수 없습니다.")
-        return False
-    
-    print("=" * 50)
-    return True
-
 if __name__ == '__main__':
-    if init_database():
-        print("\nFlask 서버 시작...")
-        app.run(debug=True)
-    else:
-        print("\n서버 시작을 중단합니다.")
+    print("\nFlask 서버 시작...")
+    app.run(debug=True)
