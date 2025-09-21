@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>웹툰픽 - 취향 설문</title>
+<style>
+body{margin:0;font-family:"Noto Sans KR",Arial,sans-serif;background:#e6f9f1;display:flex;align-items:center;justify-content:center;min-height:100vh;color:#0b1220;padding:24px;}
+.wrap{width:100%;max-width:700px;}
+.card{background:#fff;border-radius:12px;padding:20px;box-shadow:0 8px 30px rgba(15,30,80,0.08);}
+h1{margin:0 0 12px;font-size:22px;color:#006633;}
+.q{margin:12px 0;padding:12px;border-radius:10px;border:1px solid #b2e2c8;background:#e0f3e6;}
+.q label{font-weight:600;}
+.choices{margin-top:6px;}
+.middle-image img{max-width:200px;margin:12px auto;display:block;border-radius:8px;}
+button{padding:10px 14px;border-radius:8px;border:0;cursor:pointer;font-weight:700;background:#00aa44;color:#fff;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <h1>웹툰픽 - 취향 설문</h1>
+    <form method="POST">
+      <div class="q">
+        <label>액션을 좋아하시나요?</label><br>
+        <div class="choices">
+          <label><input type="radio" name="액션" value="Y"> 예</label>
+          <label><input type="radio" name="액션" value="N"> 아니오</label>
+        </div>
+      </div>
+      <div class="middle-image"><img src="https://i.namu.wiki/i/47TvA76bcQ4fMDnu115Fx8wBPS-CtLSj6Q3UWtQiwqFkLCln0fpVq95Rh9oUv2q-TDxPNt1vwaLhtd3MPgtPLQ.webp" alt="액션"></div>
+
+      <div class="q">
+        <label>로맨스를 좋아하시나요?</label><br>
+        <div class="choices">
+          <label><input type="radio" name="로맨스" value="Y"> 예</label>
+          <label><input type="radio" name="로맨스" value="N"> 아니오</label>
+        </div>
+      </div>
+      <div class="middle-image"><img src="https://shared-comic.pstatic.net/thumb/webtoon/570503/thumbnail/thumbnail_IMAG19_cbaaa393-baab-456a-b311-827953e4cf2e.jpg" alt="로맨스"></div>
+
+      <div class="q">
+        <label>스릴러를 좋아하시나요?</label><br>
+        <div class="choices">
+          <label><input type="radio" name="스릴러" value="Y"> 예</label>
+          <label><input type="radio" name="스릴러" value="N"> 아니오</label>
+        </div>
+      </div>
+      <div class="middle-image"><img src="https://cdn.realworld.to/user-files/iMIjBR7kqRIEWJjEA-X8Ig/24-05-16-05-20-12_WYnWrtBUbUY.png" alt="스릴러"></div>
+
+      <div class="q">
+        <label>sf물을 좋아하시나요?</label><br>
+        <div class="choices">
+          <label><input type="radio" name="sf물" value="Y"> 예</label>
+          <label><input type="radio" name="sf물" value="N"> 아니오</label>
+        </div>
+      </div>
+      <div class="middle-image"><img src="https://i.namu.wiki/i/q2W1wMl_0GPepS34O19q44fK6yHNvVxdk9245qdQDpnSWtOoTqkEsqjB5bl4XPSSdOOvG0GFNPy5g087FP0aIA.webp" alt="학원물"></div>
+
+      <div class="q">
+        <label>코믹한 작품을 좋아하시나요?</label><br>
+        <div class="choices">
+          <label><input type="radio" name="코믹" value="Y"> 예</label>
+          <label><input type="radio" name="코믹" value="N"> 아니오</label>
+        </div>
+      </div>
+      <div class="middle-image"><img src="https://i.namu.wiki/i/V-v7fKWOKNBZScc_dVTfkL_JIovXqEVZ3H9aeeOzTlREXTu5nTiSb6MZqAjgyiOxUwH3LR1Ib7dYFmUlgg4r9A.webp" alt="코믹"></div>
+
+      <div class="q">
+        <label>드라마틱한 스토리를 좋아하시나요?</label><br>
+        <div class="choices">
+          <label><input type="radio" name="드라마" value="Y"> 예</label>
+          <label><input type="radio" name="드라마" value="N"> 아니오</label>
+        </div>
+      </div>
+      <div class="middle-image"><img src="https://contents.kyobobook.co.kr/sih/fit-in/400x0/pdt/9791167792815.jpg" alt="드라마"></div>
+
+      <button type="submit">추천 받기</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>

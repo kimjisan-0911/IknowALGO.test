@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>추천 웹툰</title>
+<style>
+body{margin:0;font-family:"Noto Sans KR",Arial,sans-serif;background:#e6f9f1;display:flex;align-items:center;justify-content:center;min-height:100vh;color:#0b1220;padding:24px;}
+.wrap{width:100%;max-width:700px;}
+.card{background:#fff;border-radius:12px;padding:20px;box-shadow:0 8px 30px rgba(15,30,80,0.08);text-align:center;}
+h1{margin:0 0 12px;font-size:22px;color:#006633;}
+img{max-width:100%;border-radius:8px;margin-top:12px;}
+button{padding:10px 14px;border-radius:8px;border:0;cursor:pointer;font-weight:700;background:#00aa44;color:#fff;margin-top:12px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <h1>추천 작품: {{ rec.title }} ({{ genre }})</h1>
+    <img src="{{ rec.img }}" alt="{{ rec.title }}">
+    <form action="/">
+      <button type="submit">다시 설문하기</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>
