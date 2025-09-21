@@ -20,6 +20,7 @@ def question(page):
            print(dict[i]["now"])
     return render_template("question.html")
 
+#낭녕ㅎ낭사데숃
 
 if __name__ == '__main__':
     app.run(debug=True)
