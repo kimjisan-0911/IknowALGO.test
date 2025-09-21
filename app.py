@@ -61,7 +61,8 @@ def home():
         })
     
     return render_template('home.html', 
-                           todays_problem=todays_problem, 
+                           todays_problem=todays_problem,  
+                           problems=problems, 
                            level_data=level_data)
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -160,6 +161,18 @@ def allproblem():
                 best_scores[pid] = sub.score
 
     return render_template('allproblem.html', problems=problems, best_scores=best_scores)
+
+@app.route('/match', methods=['GET', 'POST'])
+def match():
+    random_pid = random.choice(list(problems.keys()))
+    problem = problems.get(random_pid)
+
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
+    elif not problem:
+        return "문제를 찾을 수 없습니다.", 404
+
+    return render_template("match.html", problem=problem, pid=random_pid)
 
 @app.route('/solvedproblem')
 def solvedproblem():
