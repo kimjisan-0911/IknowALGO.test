@@ -162,17 +162,17 @@ def allproblem():
 
     return render_template('allproblem.html', problems=problems, best_scores=best_scores)
 
-@app.route('/match', methods=['GET', 'POST'])
-def match():
-    random_pid = random.choice(list(problems.keys()))
-    problem = problems.get(random_pid)
+# @app.route('/match', methods=['GET', 'POST'])
+# def match():
+#     random_pid = random.choice(list(problems.keys()))
+#     problem = problems.get(random_pid)
 
-    if not session.get('logged_in'):
-        return redirect(url_for('login'))
-    elif not problem:
-        return "문제를 찾을 수 없습니다.", 404
+#     if not session.get('logged_in'):
+#         return redirect(url_for('login'))
+#     elif not problem:
+#         return "문제를 찾을 수 없습니다.", 404
 
-    return render_template("match.html", problem=problem, pid=random_pid)
+#     return render_template("match.html", problem=problem, pid=random_pid)
 
 @app.route('/solvedproblem')
 def solvedproblem():

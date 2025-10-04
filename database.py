@@ -61,6 +61,7 @@ class Database:
                         user_id INT NOT NULL,
                         problem_id INT NOT NULL,
                         code TEXT NOT NULL,
+                        score INT,
                         result JSON,
                         submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                         FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
